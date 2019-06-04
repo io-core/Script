@@ -1,6 +1,6 @@
 MODULE Scripts;
 
-  IMPORT SYSTEM, Files, Fonts, Intrisics;
+  IMPORT SYSTEM, Files, Fonts, Intrinsics;
 
   CONST 
     replace* = 0; insert* = 1; delete* = 2; unmark* = 3;  (*op-codes*)
@@ -33,30 +33,8 @@ MODULE Scripts;
     FontMsg* = RECORD (Msg) fnt*: Fonts.Font END ;
     
 
-    bmpHeaderEntry = RECORD
-        a: INTEGER;
-        b: INTEGER;
-        c: INTEGER;
-        d: INTEGER
-    END;
-
-    jpgHeaderEntry = RECORD
-        a: INTEGER;
-        b: INTEGER;
-        c: INTEGER;
-        d: INTEGER
-    END;
-
-    pngHeaderEntry = RECORD
-        a: INTEGER;
-        b: INTEGER;
-        c: INTEGER;
-        d: INTEGER
-    END;
 
     MethodDesc* = RECORD
-(*        module*, allocator*: Name;
-        new*: Modules.Command;             *)
         copy*: PROCEDURE (from, to: Expression);
         draw*, change*: PROCEDURE (e: Expression; VAR msg: Msg);
         selectable*: PROCEDURE (e: Expression; x, y: INTEGER): BOOLEAN;
@@ -113,20 +91,6 @@ VAR
   BEGIN e := s.first;
     WHILE e # NIL DO e.do.draw(e, m); e := e.next END
   END Draw;
-
-(*
-  PROCEDURE List*(s: Script);
-    VAR e: Expression; tag: INTEGER;
-  BEGIN e := s.first;
-    WHILE e # NIL DO
-      Texts.Write(XW, 9X); Texts.WriteHex(XW, ORD(e)); Texts.Write(XW, 9X);
-      Texts.WriteInt(XW, e.x, 5); Texts.WriteInt(XW, e.y, 5); Texts.WriteInt(XW, e.w, 5); Texts.WriteInt(XW, e.h, 5);
-      Texts.Write(XW, "/"); SYSTEM.GET(ORD(e)-8, tag); Texts.WriteHex(XW, tag);
-      SYSTEM.GET(ORD(e)-4, tag); Texts.WriteHex(XW, tag); Texts.WriteLn(XW); e := e.next
-    END ;
-    Texts.Append(Oberon.Log, XW.buf)
-  END List;
-*)
 
   (*----------------procedures operating on selection -------------------*)
 
