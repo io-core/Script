@@ -1,5 +1,5 @@
-MODULE Scripts;
-
+MODULE Sessions;
+(* Scripts -> Sessions *)
   IMPORT SYSTEM, Files, Fonts, Intrinsics;
 
   CONST 
@@ -17,9 +17,9 @@ MODULE Scripts;
       next: Expression
     END;
 
-    Script* = POINTER TO ScriptDesc;
-    Notifier* = PROCEDURE (s: Script; op: INTEGER; beg, end: LONGINT);
-    ScriptDesc* = RECORD
+    Session* = POINTER TO SessionDesc;
+    Notifier* = PROCEDURE (s: Session; op: INTEGER; beg, end: LONGINT);
+    SessionDesc* = RECORD
       len*: LONGINT;
       changed*: BOOLEAN;
       flattened*: BOOLEAN;
@@ -47,21 +47,21 @@ VAR
   END New;
 
 
-  PROCEDURE Add*(s: Script; e: Expression);
+  PROCEDURE Add*(s: Session; e: Expression);
   BEGIN e.marked := FALSE; e.selected := TRUE; e.next := s.first;
     s.first := e; s.sel := e; s.changed := TRUE
   END Add;
 
 
-  PROCEDURE SaveSession*(s: Script; name: ARRAY OF CHAR);
+  PROCEDURE Save*(s: Session; name: ARRAY OF CHAR);
     VAR f: Files.File; w: Files.Rider; 
   BEGIN f := Files.New(name); Files.Set(w, f, 0); 
   (*  Files.Write(w, GraphFileId); InitContext(c); StoreElems(w, c, s.first);  *)
     Files.Register(f)
-  END SaveSession;
+  END Save;
 
 
-  PROCEDURE ResumeSession*(s: Script; name: ARRAY OF CHAR);
+  PROCEDURE Resume*(s: Session; name: ARRAY OF CHAR);
     VAR tag: CHAR;
           b: BYTE;
           i: INTEGER;
@@ -74,10 +74,10 @@ VAR
      
     ELSE 
     END
-  END ResumeSession;
+  END Resume;
 
 
-  PROCEDURE Erase*(s: Script);
+  PROCEDURE Erase*(s: Session);
     VAR e, pred: Expression;
   BEGIN s.sel := NIL; s.changed := TRUE; e := s.first;
     WHILE (e # NIL) & e.selected DO e := e.next END ;
@@ -92,5 +92,5 @@ VAR
   END Erase;
 
 BEGIN 
-END Scripts.
+END Sessions.
 
