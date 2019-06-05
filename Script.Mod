@@ -1,7 +1,7 @@
 MODULE Script;
 
   IMPORT Files, Fonts, Viewers, Texts, Oberon,
-    TextFrames, MenuViewers, Sessions;
+    TextFrames, MenuViewers, Envs;
 
   CONST Menu = "System.Close  System.Copy  System.Grow  Script.Run  Edit.Store";
 
