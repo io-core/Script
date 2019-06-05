@@ -1,6 +1,5 @@
 MODULE Sessions;
-(* Scripts -> Sessions *)
-  IMPORT SYSTEM, Files, Fonts, Intrinsics;
+  IMPORT SYSTEM, Files, Intrinsics;
 
   CONST 
     replace* = 0; insert* = 1; delete* = 2; unmark* = 3;  (*op-codes*)
@@ -47,10 +46,10 @@ VAR
   END New;
 
 
-  PROCEDURE Add*(s: Session; e: Expression);
+  PROCEDURE Set*(s: Session; e: Expression);
   BEGIN e.marked := FALSE; e.selected := TRUE; e.next := s.first;
     s.first := e; s.sel := e; s.changed := TRUE
-  END Add;
+  END Set;
 
 
   PROCEDURE Save*(s: Session; name: ARRAY OF CHAR);
@@ -77,7 +76,7 @@ VAR
   END Resume;
 
 
-  PROCEDURE Erase*(s: Session);
+  PROCEDURE Unset*(s: Session);
     VAR e, pred: Expression;
   BEGIN s.sel := NIL; s.changed := TRUE; e := s.first;
     WHILE (e # NIL) & e.selected DO e := e.next END ;
@@ -89,7 +88,7 @@ VAR
         e := e.next
       END
     END
-  END Erase;
+  END Unset;
 
 BEGIN 
 END Sessions.
