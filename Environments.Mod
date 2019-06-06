@@ -1,4 +1,4 @@
-MODULE Envs;
+MODULE Environments;
   IMPORT SYSTEM, Files, Intrinsics;
 
   CONST 
@@ -91,5 +91,5 @@ VAR
   END Unset;
 
 BEGIN 
-END Envs.
+END Environments.
 
