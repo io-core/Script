@@ -7,6 +7,20 @@ MODULE Script;
 
   VAR W: Texts.Writer;
 
+  PROCEDURE Load*;
+    VAR T: Texts.Text;
+    S: Texts.Scanner;
+    beg, end, time: LONGINT;
+  BEGIN Texts.OpenScanner(S, Oberon.Par.text, Oberon.Par.pos); Texts.Scan(S);
+    IF (S.class = Texts.Char) & (S.codepoint = ORD("^")) OR (S.line # 0) THEN
+      Oberon.GetSelection(T, beg, end, time);
+      IF time >= 0 THEN Texts.OpenScanner(S, T, beg); Texts.Scan(S) END
+    END;
+    IF S.class = Texts.Name THEN
+      
+    END
+  END Load;
+
 
   PROCEDURE Open*;
     VAR T: Texts.Text;

@@ -1,5 +1,5 @@
 MODULE Environments;
-  IMPORT SYSTEM, Files, Intrinsics;
+  IMPORT SYSTEM, Files, Intrinsics, Texts;
 
   CONST 
     replace* = 0; insert* = 1; delete* = 2; unmark* = 3;  (*op-codes*)
@@ -39,11 +39,18 @@ MODULE Environments;
     
 VAR 
  
+  top*: Env;
   new*: Binding; 
 
   PROCEDURE New*(b: Binding);
   BEGIN   new := b 
   END New;
+
+
+  PROCEDURE Prepare*(VAR e: Env; VAR T: Text);
+    VAR t: Text;
+  BEGIN   t := T
+  END Prepare;
 
 
   PROCEDURE Set*(e: Env; b: Binding);
@@ -91,5 +98,12 @@ VAR
   END Unset;
 
 BEGIN 
+  NEW(top);
+  top.len := 0;
+  top.changed := False;
+  top.flattened := False;
+  top.sel := Nil;
+  top.first := Nil;
+  top.notify:= Nil;
 END Environments.
 
