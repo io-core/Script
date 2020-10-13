@@ -1,3 +1,12 @@
+(* begin-package-description
+The Script package automates Oberon commands.
+
+end-package-description *)
+
+(* begin-module-description
+Module Script will implement LIL, a derivative of TCL.
+
+end-module-description *)
 MODULE Script;
 
   IMPORT Files, Fonts, Viewers, Texts, Oberon,

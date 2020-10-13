@@ -1,3 +1,7 @@
+(* begin-module-description
+Module Intrinsics handles pseudo-commands and operations internal to the LIL interpreter.
+
+end-module-description *)
 MODULE Intrinsics;
 IMPORT SYSTEM, Kernel, Oberon;
 

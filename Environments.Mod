@@ -1,3 +1,7 @@
+(* begin-module-description
+Module Environments handles script execution context.
+
+end-module-description *)
 MODULE Environments;
   IMPORT SYSTEM, Files, Intrinsics, Texts;
 
