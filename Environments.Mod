@@ -1,7 +1,7 @@
-(* begin-module-description
+(* begin-module-use-description
 Module Environments handles script execution context.
 
-end-module-description *)
+end-module-use-description *)
 MODULE Environments;
   IMPORT SYSTEM, Files, Intrinsics, Texts;
 
